@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from '../HomePage/HomePage';
@@ -8,52 +8,43 @@ import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
 import userService from '../../utils/userService';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user: userService.getUser()
-    }
-  }
+export default function App() {
+  const [user, setUser] = useState(userService.getUser());
 
-  handleLogout = () => {
+  const handleLogout = () => {
     userService.logout();
-    this.setState({user: null});
+    setUser(null);
   };
 
-  handleSignupOrLogin = () => {
-    this.setState({user: userService.getUser()});
+  const handleSignupOrLogin = () => {
+    setUser(userService.getUser());
   };
 
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <NavBar user={this.state.user} handleLogout={this.handleLogout}/>
-        </header>
-        <Switch>
-          <Route exact path='/' render={() =>
-              <HomePage />
-          }/>
-          <Route exact path='/pokemon' render={() =>
-              <IndexPage />
-          }/>
-          <Route exact path='/signup' render={({ history }) => 
-            <SignupPage
-              history={history}
-              handleSignupOrLogin={this.handleSignupOrLogin}
-            />
-          }/>
-          <Route exact path='/login' render={({ history }) => 
-            <LoginPage
-              history={history}
-              handleSignupOrLogin={this.handleSignupOrLogin}
-            />
-          }/>
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <header className="App-header">
+        <NavBar user={user} handleLogout={handleLogout}/>
+      </header>
+      <Switch>
+        <Route exact path='/' render={() =>
+            <HomePage />
+        }/>
+        <Route exact path='/pokemon' render={() =>
+            <IndexPage />
+        }/>
+        <Route exact path='/signup' render={({ history }) => 
+          <SignupPage
+            history={history}
+            handleSignupOrLogin={handleSignupOrLogin}
+          />
+        }/>
+        <Route exact path='/login' render={({ history }) => 
+          <LoginPage
+            history={history}
+            handleSignupOrLogin={handleSignupOrLogin}
+          />
+        }/>
+      </Switch>
+    </div>
+  );
 }
-
-export default App;

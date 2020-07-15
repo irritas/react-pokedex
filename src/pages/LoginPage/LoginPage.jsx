@@ -1,56 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
 
-class LoginPage extends Component {
-  
-  state = {
-    email: '',
-    pw: ''
+export default function LoginPage(props) {
+  const [state, setState] = useState({ email: '', pw: '' });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
   };
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await userService.login(this.state);
-      this.props.handleSignupOrLogin();
-      this.props.history.push('/');
+      await userService.login(state);
+      props.handleSignupOrLogin();
+      props.history.push('/');
     } catch (err) {
       alert('Invalid Credentials!');
     }
-  }
+  };
 
-  render() {
-    return (
-      <div className="LoginPage">
-        <header className="header-footer">Log In</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-            </div>
+  return (
+    <div className="LoginPage">
+      <header className="header-footer">Log In</header>
+      <form className="form-horizontal" onSubmit={handleSubmit} >
+        <div className="form-group">
+          <div className="col-sm-12">
+            <input type="email" className="form-control" placeholder="Email" value={state.email} name="email" onChange={handleChange} />
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
-            </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-12">
+            <input type="password" className="form-control" placeholder="Password" value={state.pw} name="pw" onChange={handleChange} />
           </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
-            </div>
+        </div>
+        <div className="form-group">
+          <div className="col-sm-12 text-center">
+            <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
+            <Link to='/'>Cancel</Link>
           </div>
-        </form>
-      </div>
-    );
-  }
+        </div>
+      </form>
+    </div>
+  );
 }
-
-export default LoginPage;
