@@ -25,7 +25,7 @@ export default function IndexDetail(props) {
         </Link>
         <div>
           {pokemon.types.map((type, idx) => 
-            <span key={idx}>{type.type.name}</span>
+            <span key={idx}>{type.type.name.toUpperCase()}</span>
           )}
         </div>
       </div>
