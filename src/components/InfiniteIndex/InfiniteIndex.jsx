@@ -26,7 +26,10 @@ export default function IndexPage(props) {
         endMessage={<h4>End of current list!</h4>}
       >
         {items.map((i, idx) =>
-          <IndexDetail id={idx + 1 + props.offset} getFullId={props.getFullId} key={i} />
+          idx < props.max - props.offset ?
+            <IndexDetail id={idx + 1 + props.offset} getFullId={props.getFullId} key={i} />
+            :
+            ''
         )}
       </InfiniteScroll>
 		</>
