@@ -19,7 +19,7 @@ export default function IndexDetail(props) {
     pokemon.name ?
       <div>
         <Link to={`/pokemon/${props.id}`}>
-          <img src={pokedex.getFullImage(fullId)} />
+          <img src={pokedex.getFullImage(fullId)} alt={pokemon.name} />
           <div>#{fullId}</div>
           <div>{pokemon.name.toUpperCase()}</div>
         </Link>

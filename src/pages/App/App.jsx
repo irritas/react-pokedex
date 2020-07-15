@@ -13,6 +13,7 @@ import pokedex from '../../utils/poke-api'
 export default function App() {
   const [user, setUser] = useState(userService.getUser());
   const max = pokedex.getUpperLimit();
+  const display = 12;
 
   function handleLogout() {
     userService.logout();
@@ -41,7 +42,7 @@ export default function App() {
             <HomePage max={max} getFullId={getFullId} />
         }/>
         <Route exact path='/pokemon' render={() =>
-            <IndexPage max={max} getFullId={getFullId} />
+            <IndexPage max={max} display={display} getFullId={getFullId} />
         }/>
         <Route exact path='/pokemon/:id' render={props =>
             <DetailPage {...props} max={max} getFullId={getFullId} />
