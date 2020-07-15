@@ -4,7 +4,7 @@ import SignupForm from '../../components/SignupForm/SignupForm';
 export default function SignupPage(props) {
   const [state, setState] = useState({ ...props, message: '' });
 
-  const updateMessage = (msg) => {
+  function updateMessage(msg) {
     setState({ message: msg });
   };
 

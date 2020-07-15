@@ -10,13 +10,13 @@ export default function SignupForm(props) {
     passwordConf: ''
   });
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     props.updateMessage('');
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       await userService.signup(state);
@@ -27,7 +27,7 @@ export default function SignupForm(props) {
     }
   };
 
-  const isFormInvalid = () => {
+  function isFormInvalid() {
     return !(state.name && state.email && state.password && state.password === state.passwordConf);
   };
 

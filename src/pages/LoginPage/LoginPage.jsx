@@ -5,12 +5,12 @@ import userService from '../../utils/userService';
 export default function LoginPage(props) {
   const [state, setState] = useState({ email: '', pw: '' });
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       await userService.login(state);
