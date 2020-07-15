@@ -4,6 +4,7 @@ import userService from '../../utils/userService';
 
 export default function LoginPage(props) {
   const [state, setState] = useState({ email: '', pw: '' });
+  const [error, setError] = useState('');
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -17,7 +18,7 @@ export default function LoginPage(props) {
       props.handleSignupOrLogin();
       props.history.push('/');
     } catch (err) {
-      alert('Invalid Credentials!');
+      setError('Invalid Credentials!');
     }
   };
 
@@ -42,6 +43,7 @@ export default function LoginPage(props) {
           </div>
         </div>
       </form>
+      <p>{error}</p>
     </div>
   );
 }
