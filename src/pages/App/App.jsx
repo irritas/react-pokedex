@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import HomePage from '../HomePage/HomePage';
 import IndexPage from '../IndexPage/IndexPage';
 import DetailPage from '../DetailPage/DetailPage';
+import DetailCard from '../../components/DetailCard/DetailCard';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
@@ -12,8 +12,15 @@ import pokedex from '../../utils/poke-api'
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser());
+  const [random, setRandom] = useState();
   const max = pokedex.getUpperLimit();
   const display = 12;
+
+  useEffect(() => {
+    let rand = Math.floor(Math.random() * Math.floor(max)) + 1;
+    let fullRand = getFullId(rand);
+    setRandom(<DetailCard id={rand} fullId={fullRand} />);
+  }, []);
 
   function handleLogout() {
     userService.logout();
@@ -39,7 +46,10 @@ export default function App() {
       </header>
       <Switch>
         <Route exact path='/' render={() =>
-            <HomePage max={max} getFullId={getFullId} />
+          <div>
+            Home Page
+            {random}
+          </div>
         }/>
         <Route exact path='/pokemon' render={() =>
             <IndexPage max={max} display={display} getFullId={getFullId} />
