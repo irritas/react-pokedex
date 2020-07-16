@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import SignupForm from '../../components/SignupForm/SignupForm';
 
 export default function SignupPage(props) {
-  const [state, setState] = useState({ ...props, message: '' });
+  const [message, setMessage] = useState('');
 
   function updateMessage(msg) {
-    setState({ message: msg });
+    setMessage(msg);
   };
 
   return (
     <div className='SignupPage'>
-      <SignupForm {...state} updateMessage={updateMessage} />
-      <p>{state.message}</p>
+      <SignupForm {...props} message={message} updateMessage={updateMessage} />
+      <p>{message}</p>
     </div>
   );
 }

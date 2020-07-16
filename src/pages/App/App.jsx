@@ -19,7 +19,7 @@ export default function App() {
   useEffect(() => {
     let rand = Math.floor(Math.random() * Math.floor(max)) + 1;
     let fullRand = getFullId(rand);
-    setRandom(<DetailCard id={rand} fullId={fullRand} />);
+    setRandom(<DetailCard id={rand} link={true} fullId={fullRand} />);
   }, []);
 
   function handleLogout() {

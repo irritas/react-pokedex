@@ -24,7 +24,7 @@ export default function DetailPage(props) {
 			:
 			pokemon.name ?
 				<div>
-					<DetailCard {...props} id={id} fullId={fullId} />
+					<DetailCard {...props} id={id} link={false} fullId={fullId} />
 					<div>More Info Here</div>
 				</div>
 				:

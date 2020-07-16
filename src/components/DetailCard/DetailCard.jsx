@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import pokedex from '../../utils/poke-api';
 
 export default function DetailPage(props) {
@@ -16,9 +17,19 @@ export default function DetailPage(props) {
 	return (
 		pokemon.name ?
       <div>
-        <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
-        <div>#{props.fullId}</div>
-        <div>{pokemon.name.toUpperCase()}</div>
+        {props.link ?
+          <Link to={`/pokemon/${props.id}`}>
+            <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
+            <div>#{props.fullId}</div>
+            <div>{pokemon.name.toUpperCase()}</div>
+          </Link>
+          :
+          <>
+            <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
+            <div>#{props.fullId}</div>
+            <div>{pokemon.name.toUpperCase()}</div>
+          </>
+        }
         <div>
           {pokemon.types.map((type, idx) => 
             <span key={idx}>{type.type.name.toUpperCase()}</span>
