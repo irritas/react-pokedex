@@ -19,13 +19,15 @@ export default function DetailPage(props) {
 	return (
 		id > props.max ?
 			<div>
-				Not Available Yet
+				<h1>Not Available</h1>
 			</div>
 			:
 			pokemon.name ?
 				<div>
 					<DetailCard {...props} id={id} link={false} fullId={fullId} />
-					<div>More Info Here</div>
+					<div>
+						More Info TBA
+					</div>
 				</div>
 				:
 				<div>

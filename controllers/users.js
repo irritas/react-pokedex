@@ -6,9 +6,7 @@ const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
-  login,
-  collect,
-  remove
+  login
 };
 
 async function login(req, res) {
@@ -36,33 +34,6 @@ async function signup(req, res) {
     res.json({ token });
   } catch (err) {
     res.status(400).json(err);
-  }
-}
-
-async function collect(req, res, next) {
-  if (req.user) return next();
-  try {
-    const newCollected = [...user.collected];
-    newCollected.push(req.body.id);
-    newCollected.sort();
-    user.collected = [...newCollected];
-    user.save();
-    return res.status(201).json(newCollected);
-  } catch (err) {
-    return res.status(400).json(err);
-  }
-}
-
-async function remove(req, res, next) {
-  if (req.user) return next();
-  try {
-    const newCollected = [...user.collected];
-    newCollected.filter(e => e !== req.body.id);
-    user.collected = [...newCollected];
-    user.save();
-    return res.status(201).json(newCollected);
-  } catch (err) {
-    return res.status(400).json(err);
   }
 }
 

@@ -47,7 +47,7 @@ export default function App() {
       <Switch>
         <Route exact path='/' render={() =>
           <div>
-            Home Page
+            <h1>React Pokedex</h1>
             {random}
           </div>
         }/>
