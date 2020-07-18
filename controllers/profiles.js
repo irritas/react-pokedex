@@ -8,7 +8,7 @@ module.exports = {
 };
 
 async function show(req, res) {
-  const profile = await Profile.findOne({ id: req.user._id });
+  const profile = await Profile.findOne({ user: req.user._id });
   res.status(200).json(profile);
 }
 
@@ -18,7 +18,7 @@ async function create(req, res) {
 }
 
 async function add(req, res) {
-  const profile = await Profile.findOne({ id: req.user._id });
+  const profile = await Profile.findOne({ user: req.user._id });
   profile.list.push(req.body.pokeId);
   profile.list.sort();
   profile.save();
@@ -26,7 +26,7 @@ async function add(req, res) {
 }
 
 async function remove(req, res) {
-  const profile = await Profile.findOne({ id: req.user._id });
+  const profile = await Profile.findOne({ user: req.user._id });
   profile.list.splice(profile.list.indexOf(req.body.pokeId), 1);
   profile.save();
   res.status(200).json(profile);

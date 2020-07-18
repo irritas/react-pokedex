@@ -22,7 +22,7 @@ export default function SignupForm(props) {
     try {
       await userService.signup(state);
       props.handleSignupOrLogin();
-      await profileService.createProfile();
+      await profileService.create();
       props.history.push('/');
     } catch (err) {
       props.updateMessage(err.message);

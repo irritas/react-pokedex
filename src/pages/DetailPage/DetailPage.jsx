@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DetailCard from '../../components/DetailCard/DetailCard';
+import MoreDetails from '../../components/MoreDetails/MoreDetails';
 import pokedex from '../../utils/poke-api';
 
 export default function DetailPage(props) {
@@ -25,9 +26,7 @@ export default function DetailPage(props) {
 			pokemon.name ?
 				<div>
 					<DetailCard {...props} id={id} link={false} fullId={fullId} />
-					<div>
-						More Info TBA
-					</div>
+					<MoreDetails {...props} id={id} />
 				</div>
 				:
 				<div>
