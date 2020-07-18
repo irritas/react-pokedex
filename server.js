@@ -14,10 +14,9 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use(require('./config/auth'));
-
 // API ROUTES
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/profiles', require('./routes/api/profiles'));
 
 // CATCH-ALL ROUTE
 app.get('/*', function(req, res) {

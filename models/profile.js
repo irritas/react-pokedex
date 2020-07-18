@@ -5,7 +5,10 @@ const profileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  list: []
+  list: {
+    type: [Number],
+    default: [],
+  }
 }, {
   timestamps: true
 });

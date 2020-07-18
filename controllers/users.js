@@ -1,6 +1,5 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-const user = require('../models/user');
 
 const SECRET = process.env.SECRET;
 

@@ -8,7 +8,7 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
 import userService from '../../utils/userService';
-import pokedex from '../../utils/poke-api'
+import pokedex from '../../utils/poke-api';
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser());
