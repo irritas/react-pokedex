@@ -6,7 +6,7 @@ export default function NavBar(props) {
     <>
       <Link to='/profile' className='NavBar-link'>Profile</Link>
       &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <Link to='' onClick={props.handleLogout} className='NavBar-link'>Log Out</Link>
+      <Link to='/' onClick={props.handleLogout} className='NavBar-link'>Log Out</Link>
     </>
     :
     <>

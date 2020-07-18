@@ -22,6 +22,8 @@ export default function App() {
     if (user && !profile) getProfile();
   }, [user]);
 
+  useEffect(() => {}, [profile]);
+
   function handleLogout() {
     userService.logout();
     setUser(null);
@@ -48,11 +50,6 @@ export default function App() {
     setProfile(await profileService.update(addOrRemove, id));
   };
 
-  function getList() {
-    if (profile) return profile.list.sort();
-    return [];
-  }
-
   return (
     <div className="App">
       <header className="App-header">
@@ -60,16 +57,16 @@ export default function App() {
       </header>
       <Switch>
         <Route exact path='/' render={() =>
-          <HomePage user={user} max={max} getFullId={getFullId} updateProfile={updateProfile} getList={getList} />
+          <HomePage user={user} profile={profile} max={max} getFullId={getFullId} updateProfile={updateProfile} />
         }/>
         <Route exact path='/pokemon' render={() =>
-          <IndexPage user={user} max={max} display={display} getFullId={getFullId} updateProfile={updateProfile} getList={getList} />
+          <IndexPage user={user} profile={profile} max={max} display={display} getFullId={getFullId} updateProfile={updateProfile} />
         }/>
         <Route exact path='/pokemon/:id' render={props =>
-          <DetailPage {...props} max={max} getFullId={getFullId} updateProfile={updateProfile} getList={getList} />
+          <DetailPage {...props} user={user} profile={profile} max={max} getFullId={getFullId} updateProfile={updateProfile} />
         }/>
         <Route exact path='/profile' render={() => 
-          <ProfilePage user={user} display={display} getFullId={getFullId} getList={getList} />
+          <ProfilePage user={user} profile={profile} display={display} max={max} getFullId={getFullId} updateProfile={updateProfile} />
         }/>
         <Route exact path='/signup' render={({ history }) => 
           <SignupPage history={history} handleSignupOrLogin={handleSignupOrLogin} />

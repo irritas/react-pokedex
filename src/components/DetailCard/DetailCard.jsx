@@ -35,25 +35,18 @@ export default function DetailPage(props) {
 
   function getColor() {
     return pokedex.getTypeColor(pokemon.types[0].type.name);
-  }
+  };
+
+  function handleClick() {};
 
 	return (
 		pokemon.name ?
       <div>
-        <CollectButton {...props} />
-        {props.link ?
-          <Link to={`/pokemon/${props.id}`}>
-            <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
-            <div>#{props.fullId}</div>
-            <div>{pokemon.name.toUpperCase()}</div>
-          </Link>
-          :
-          <>
-            <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
-            <div>#{props.fullId}</div>
-            <div>{pokemon.name.toUpperCase()}</div>
-          </>
-        }
+        <div>
+          <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
+        </div>
+        <div>#{props.fullId}</div>
+        <div>{pokemon.name.toUpperCase()}</div>
         <div>
           {pokemon.types.map((type, idx) => 
             <span key={idx}>{type.type.name.toUpperCase()}</span>
@@ -90,6 +83,16 @@ export default function DetailPage(props) {
             }]
           }} />
         </div>
+        <CollectButton {...props} handleClick={handleClick} />
+        {props.link ?
+          <div>
+            <Link to={`/pokemon/${props.id}`}>
+              Learn More About {pokemon.name.toUpperCase()}
+            </Link>
+          </div>
+          :
+          ''
+        }
       </div>
       :
       <div>

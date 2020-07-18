@@ -18,11 +18,11 @@ async function create(req, res) {
 }
 
 async function add(req, res) {
-  const profile = await Profile.findOneAndUpdate({ user: req.user._id }, { $addToSet: { list: req.body.id } });
+  const profile = await Profile.findOneAndUpdate({ user: req.user._id }, { $addToSet: { list: req.body.id } }, { new: true });
   res.status(200).json(profile);
 }
 
 async function remove(req, res) {
-  const profile = await Profile.findOneAndUpdate({ user: req.user._id }, { $pull: { list: req.body.id } });
+  const profile = await Profile.findOneAndUpdate({ user: req.user._id }, { $pull: { list: req.body.id } }, { new: true });
   res.status(200).json(profile);
 }

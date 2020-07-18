@@ -5,14 +5,18 @@ import InfiniteIndex from '../../components/InfiniteIndex/InfiniteIndex';
 export default function IndexPage(props) {
 	const [items, setItems] = useState([]);
 	const [infinite, setInfinite] = useState(false);
+	const [loaded, setLoaded] = useState(false);
 
 	useEffect(() => {
-		let current = [...items];
-		for (let i = 1; i <= props.display; i++) {
-			current.push(<IndexDetail {...props} id={i} key={i} />)
+		if (!loaded && props.profile) {
+			let current = [...items];
+			for (let i = 1; i <= props.display; i++) {
+				current.push(<IndexDetail {...props} id={i} key={i} />)
+			}
+			setItems(current);
+			setLoaded(true);
 		}
-		setItems(current);
-	}, []);
+	}, [props.profile]);
 
 	function handleClick() {
 		setInfinite(true);
