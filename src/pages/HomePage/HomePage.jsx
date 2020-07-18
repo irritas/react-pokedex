@@ -7,7 +7,7 @@ export default function HomePage(props) {
   useEffect(() => {
     let rand = Math.floor(Math.random() * Math.floor(props.max)) + 1;
     let fullRand = props.getFullId(rand);
-    setRandom(<DetailCard id={rand} link={true} fullId={fullRand} />);
+    setRandom(<DetailCard {...props} id={rand} link={true} fullId={fullRand} />);
   }, []);
 
   return (

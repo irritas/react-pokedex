@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import CollectButton from '../CollectButton/CollectButton';
 import pokedex from '../../utils/poke-api';
 import CanvasJSReact from '../../canvasjs.react';
-const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function DetailPage(props) {
@@ -40,6 +40,7 @@ export default function DetailPage(props) {
 	return (
 		pokemon.name ?
       <div>
+        <CollectButton {...props} />
         {props.link ?
           <Link to={`/pokemon/${props.id}`}>
             <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />

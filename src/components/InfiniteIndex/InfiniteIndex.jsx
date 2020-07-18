@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import IndexDetail from '../IndexDetail/IndexDetail';
 
 export default function IndexPage(props) {
 	const [items, setItems] = useState(Array.from({ length: props.display }));
-	const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
 
 	function fetchMore() {
     if (items.length >= props.max - props.display) {
@@ -27,7 +27,7 @@ export default function IndexPage(props) {
       >
         {items.map((i, idx) =>
           idx < props.max - props.display ?
-            <IndexDetail id={idx + 1 + props.display} getFullId={props.getFullId} key={i} />
+            <IndexDetail {...props} id={idx + 1 + props.display} key={idx} />
             :
             ''
         )}

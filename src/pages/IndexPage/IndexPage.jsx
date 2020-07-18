@@ -9,7 +9,7 @@ export default function IndexPage(props) {
 	useEffect(() => {
 		let current = [...items];
 		for (let i = 1; i <= props.display; i++) {
-			current.push(<IndexDetail id={i} getFullId={props.getFullId} key={i} />)
+			current.push(<IndexDetail {...props} id={i} key={i} />)
 		}
 		setItems(current);
 	}, []);

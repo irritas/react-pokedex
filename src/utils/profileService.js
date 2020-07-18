@@ -1,8 +1,10 @@
 import tokenService from './tokenService';
+import { JsonWebTokenError } from 'jsonwebtoken';
 
 export default {
   create,
-  show
+  show,
+  update
 };
 
 const BASE_URL = '/api/profiles/';
@@ -23,5 +25,16 @@ function show() {
     headers: {
       'Authorization': 'Bearer ' + tokenService.getToken()
     }
+  }).then(res => res.json());
+}
+
+function update(addOrRemove, id) {
+  return fetch(BASE_URL + addOrRemove, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken()
+    },
+    body: JSON.stringify({id: id})
   }).then(res => res.json());
 }

@@ -14,8 +14,13 @@ export default function DetailPage(props) {
   }, []);
 
 	return (
-		<div>
-			More Info on {pokemon.name.toUpperCase()} TBD
-		</div>
+    pokemon.name ?
+      <div>
+        More Info on {pokemon.name.toUpperCase()} TBD
+      </div>
+      :
+      <div>
+        #{props.fullId} Loading...
+      </div>
   );
 }

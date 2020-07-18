@@ -18,16 +18,11 @@ async function create(req, res) {
 }
 
 async function add(req, res) {
-  const profile = await Profile.findOne({ user: req.user._id });
-  profile.list.push(req.body.pokeId);
-  profile.list.sort();
-  profile.save();
+  const profile = await Profile.findOneAndUpdate({ user: req.user._id }, { $addToSet: { list: req.body.id } });
   res.status(200).json(profile);
 }
 
 async function remove(req, res) {
-  const profile = await Profile.findOne({ user: req.user._id });
-  profile.list.splice(profile.list.indexOf(req.body.pokeId), 1);
-  profile.save();
+  const profile = await Profile.findOneAndUpdate({ user: req.user._id }, { $pull: { list: req.body.id } });
   res.status(200).json(profile);
 }
