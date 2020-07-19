@@ -16,7 +16,7 @@ export default function IndexPage(props) {
           {list.map(id => {
             return (
               <div>
-                <IndexDetail {...props} id={id} key={id} />
+                <IndexDetail {...props} id={id} key={props.max + id} />
               </div>
             );
           })}

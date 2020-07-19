@@ -12,11 +12,12 @@ import userService from '../../utils/userService';
 import pokedex from '../../utils/poke-api';
 import profileService from '../../utils/profileService';
 
+const max = pokedex.getUpperLimit();
+const display = 12;
+
 export default function App() {
   const [user, setUser] = useState(userService.getUser());
   const [profile, setProfile] = useState(null);
-  const max = pokedex.getUpperLimit();
-  const display = 12;
 
   useEffect(() => {
     if (user && !profile) getProfile();
