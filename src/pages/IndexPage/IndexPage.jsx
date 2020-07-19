@@ -18,6 +18,14 @@ export default function IndexPage(props) {
 		}
 	}, [props.profile]);
 
+	useEffect(() => {
+		let current = [...items];
+		for (let i = 1; i <= props.display; i++) {
+			current.push(<IndexDetail {...props} id={i} key={i} />)
+		}
+		setItems(current);
+	}, []);
+
 	function handleClick() {
 		setInfinite(true);
 	};
