@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Transition } from 'react-transition-group';
 import CollectButton from '../CollectButton/CollectButton';
 import pokedex from '../../utils/poke-api';
 import CanvasJSReact from '../../canvasjs.react';
@@ -38,63 +39,66 @@ export default function DetailPage(props) {
   };
 
 	return (
-		pokemon.name ?
-      <div>
-        <div>
-          <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
-        </div>
-        <div>#{props.fullId}</div>
-        <div>{pokemon.name.toUpperCase()}</div>
-        <div>
-          {pokemon.types.map((type, idx) => 
-            <span key={idx}>{type.type.name.toUpperCase()}</span>
-          )}
-        </div>
-        <div>
-          <span>Height: {pokemon.height / 10}m</span>
-          <span>Weight: {pokemon.weight / 10}kg</span>
-        </div>
-        <div>
-          <CanvasJSChart options={{
-            animationEnabled: true,
-            theme: 'light2',
-            axisX: {
-              reversed: true,
-              gridThickness: 0,
-              tickLength: 0,
-            },
-            axisY: {
-              maximum: highestStat(),
-              gridThickness: 0,
-              tickLength: 0,
-              labelFormatter: function(e) {
-                return "";
-              }
-            },
-            data: [{
-              type: 'bar',
-              color: getColor(),
-              indexLabel: '{y}',
-              indexLabelPlacement: 'inside',
-              indexLabelFontColor: 'white',
-              dataPoints: fetchStats()
-            }]
-          }} />
-        </div>
-        <CollectButton {...props} />
-        {props.link ?
+    <div>
+      {pokemon.name ?
+        <>
           <div>
-            <Link to={`/pokemon/${props.id}`}>
-              Learn More About {pokemon.name.toUpperCase()}
-            </Link>
+            <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
           </div>
-          :
-          ''
-        }
-      </div>
-      :
-      <div>
-        #{props.fullId} Loading...
-      </div>
+          <div>#{props.fullId}</div>
+          <div>{pokemon.name.toUpperCase()}</div>
+          <div>
+            {pokemon.types.map((type, idx) => 
+              <span key={idx}>{type.type.name.toUpperCase()}</span>
+            )}
+          </div>
+          <div>
+            <span>Height: {pokemon.height / 10}m</span>
+            <span>Weight: {pokemon.weight / 10}kg</span>
+          </div>
+          <div>
+            <CanvasJSChart options={{
+              animationEnabled: true,
+              theme: 'light2',
+              axisX: {
+                reversed: true,
+                gridThickness: 0,
+                tickLength: 0,
+              },
+              axisY: {
+                maximum: highestStat(),
+                gridThickness: 0,
+                tickLength: 0,
+                labelFormatter: function(e) {
+                  return "";
+                }
+              },
+              data: [{
+                type: 'bar',
+                color: getColor(),
+                indexLabel: '{y}',
+                indexLabelPlacement: 'inside',
+                indexLabelFontColor: 'white',
+                dataPoints: fetchStats()
+              }]
+            }} />
+          </div>
+          <CollectButton {...props} />
+          {props.link ?
+            <div>
+              <Link to={`/pokemon/${props.id}`}>
+                Learn More About {pokemon.name.toUpperCase()}
+              </Link>
+            </div>
+            :
+            ''
+          }
+        </>
+        :
+        <>
+          #{props.fullId} Loading...
+        </>
+      }
+    </div>
 	);
 }

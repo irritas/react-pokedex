@@ -44,9 +44,6 @@ export default function ProfilePage(props) {
         <h1>My Collection</h1>
         {lists.length ?
           <div>
-            {/* {lists.map(list =>
-              <IndexDetail {...props} id={list.pokemon} key={list.pokemon} />
-            )} */}
             <InfiniteScroll
               dataLength={items.length}
               next={fetchMore}
@@ -55,7 +52,7 @@ export default function ProfilePage(props) {
             >
               {items.map((i, idx) =>
                 idx < lists.length ?
-                  <IndexDetail {...props} id={lists[idx].pokemon} key={idx} />
+                  <IndexDetail {...props} id={lists[idx].pokemon} key={lists[idx].pokemon} />
                   :
                   ''
               )}
