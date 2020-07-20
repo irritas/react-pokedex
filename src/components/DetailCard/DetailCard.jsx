@@ -37,8 +37,6 @@ export default function DetailPage(props) {
     return pokedex.getTypeColor(pokemon.types[0].type.name);
   };
 
-  function handleClick() {};
-
 	return (
 		pokemon.name ?
       <div>
@@ -83,7 +81,7 @@ export default function DetailPage(props) {
             }]
           }} />
         </div>
-        <CollectButton {...props} handleClick={handleClick} />
+        <CollectButton {...props} />
         {props.link ?
           <div>
             <Link to={`/pokemon/${props.id}`}>

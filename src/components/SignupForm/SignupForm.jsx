@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
-import profileService from '../../utils/profileService';
 
 export default function SignupForm(props) {
   const [state, setState] = useState({
@@ -22,7 +21,6 @@ export default function SignupForm(props) {
     try {
       await userService.signup(state);
       props.handleSignupOrLogin();
-      await profileService.create();
       props.history.push('/');
     } catch (err) {
       props.updateMessage(err.message);

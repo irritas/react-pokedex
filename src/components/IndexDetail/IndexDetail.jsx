@@ -5,7 +5,6 @@ import pokedex from '../../utils/poke-api';
 
 export default function IndexDetail(props) {
   const [pokemon, setPokemon] = useState({});
-  const [button, setButton] = useState(true);
   const fullId = props.getFullId(props.id);
 
   useEffect(() => {
@@ -16,10 +15,6 @@ export default function IndexDetail(props) {
     }
     fetchData();
   }, []);
-
-  function handleClick() {
-    setButton(false);
-  };
 
   return (
     pokemon.name ?
@@ -36,13 +31,7 @@ export default function IndexDetail(props) {
             <span key={idx}>{type.type.name.toUpperCase()}</span>
           )}
         </div>
-        {button ?
-          <CollectButton {...props} handleClick={handleClick} />
-          :
-          <div>
-            Done!
-          </div>
-        }
+        <CollectButton {...props} />
       </div>
       :
       <div>

@@ -10,25 +10,16 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import NavBar from '../../components/NavBar/NavBar';
 import userService from '../../utils/userService';
 import pokedex from '../../utils/poke-api';
-import profileService from '../../utils/profileService';
 
 const max = pokedex.getUpperLimit();
 const display = 12;
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser());
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    if (user && !profile) getProfile();
-  }, [user]);
-
-  useEffect(() => {}, [profile]);
 
   function handleLogout() {
     userService.logout();
     setUser(null);
-    setProfile(null);
   };
 
   function handleSignupOrLogin() {
@@ -42,14 +33,6 @@ export default function App() {
     else param = id.toString();
     return param;
   };
-  
-  async function getProfile() {
-    setProfile(await profileService.show());
-  };
-
-  async function updateProfile(addOrRemove, id) {
-    setProfile(await profileService.update(addOrRemove, id));
-  };
 
   return (
     <div className="App">
@@ -58,16 +41,16 @@ export default function App() {
       </header>
       <Switch>
         <Route exact path='/' render={() =>
-          <HomePage user={user} profile={profile} max={max} getFullId={getFullId} updateProfile={updateProfile} />
+          <HomePage user={user} max={max} getFullId={getFullId} />
         }/>
         <Route exact path='/pokemon' render={() =>
-          <IndexPage user={user} profile={profile} max={max} display={display} getFullId={getFullId} updateProfile={updateProfile} />
+          <IndexPage user={user} max={max} display={display} getFullId={getFullId} />
         }/>
         <Route exact path='/pokemon/:id' render={props =>
-          <DetailPage {...props} user={user} profile={profile} max={max} getFullId={getFullId} updateProfile={updateProfile} />
+          <DetailPage {...props} user={user} max={max} getFullId={getFullId} />
         }/>
         <Route exact path='/profile' render={() => 
-          <ProfilePage user={user} profile={profile} display={display} max={max} getFullId={getFullId} updateProfile={updateProfile} />
+          <ProfilePage user={user} display={display} max={max} getFullId={getFullId} />
         }/>
         <Route exact path='/signup' render={({ history }) => 
           <SignupPage history={history} handleSignupOrLogin={handleSignupOrLogin} />

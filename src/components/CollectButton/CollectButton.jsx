@@ -1,26 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import listService from '../../utils/listService';
 
 export default function CollectButton(props) {
-  const [collected, setCollected] = useState(true);
+  const [collected, setCollected] = useState(false);
+  const [list, setList] = useState({ users: [] });
   
   useEffect(() => {
-    if (props.profile) setCollected(props.profile.list.includes(parseInt(props.id)));
-  }, [props.profile]);
+    if (props.user) getList();
+  }, []);
+  
+  useEffect(() => {
+    setCollected(list.users.includes(props.user._id));
+  }, [list]);
+
+  async function getList() {
+    const list = await listService.show(props.id);
+    setList(list ? list : { users: [] });
+  };
+
+  async function handleClick(addOrRemove) {
+    setList(await listService.update(addOrRemove, props.id));
+  };
 
   return (
-    props.user ?
+    props.user ? 
       collected ? 
         <div>
           <button onClick={() => {
-            props.updateProfile('remove', props.id);
-            props.handleClick();
+            handleClick('/remove');
           }}>-</button>
         </div>
         :
         <div>
           <button onClick={() => {
-            props.updateProfile('add', props.id);
-            props.handleClick();
+            handleClick('/add');
           }}>+</button>
         </div>
       :

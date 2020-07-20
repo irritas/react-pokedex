@@ -17,21 +17,18 @@ export default function IndexPage(props) {
   }
 
 	return (
-		<>
-			<InfiniteScroll
-        dataLength={items.length}
-        next={fetchMore}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-        endMessage={<h4>End of current list!</h4>}
-      >
-        {items.map((i, idx) =>
-          idx < props.max - props.display ?
-            <IndexDetail {...props} id={idx + 1 + props.display} key={idx} />
-            :
-            ''
-        )}
-      </InfiniteScroll>
-		</>
+		<InfiniteScroll
+      dataLength={items.length}
+      next={fetchMore}
+      hasMore={hasMore}
+      loader={<h4>Loading...</h4>}
+    >
+      {items.map((i, idx) =>
+        idx < props.max - props.display ?
+          <IndexDetail {...props} id={idx + 1 + props.display} key={idx} />
+          :
+          ''
+      )}
+    </InfiniteScroll>
 	);
 }
