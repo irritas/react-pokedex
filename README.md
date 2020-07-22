@@ -64,6 +64,7 @@ Icebox
 ------
 
 * React transitions
+* Pokémon abilities and moves
 * Search feature
 * Filter feature
-* Pokémon abilities and moves
+* Sort feature
