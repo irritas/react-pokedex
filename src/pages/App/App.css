@@ -103,6 +103,7 @@ img {
 
 .theme button:focus {
   outline: none;
+  box-shadow: 0 0 3px indigo;
 }
 
 .hide-link {
