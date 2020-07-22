@@ -1,7 +1,7 @@
 React Pokédex
 =============
 
-The Pokédex is an essential tool for tracking your collection of Pokémon and giving essential information about them.
+The Pokédex is an essential tool for tracking your collection of Pokémon and giving detailed information about them.
 
 
 Screenshots
