@@ -39,6 +39,11 @@ export default function DetailPage(props) {
     return pokedex.getTypeColor(pokemon.types[0].type.name);
   };
 
+  function getSecondColor() {
+    if (pokemon.types.length > 1) return pokedex.getTypeColor(pokemon.types[1].type.name);
+    return getColor();
+  };
+
 	return (
     <div className='box m-0 mb-3'>
       {pokemon.name ?
@@ -84,7 +89,7 @@ export default function DetailPage(props) {
                 },
                 data: [{
                   type: 'bar',
-                  color: getColor(),
+                  color: getSecondColor(),
                   indexLabel: '{y}',
                   indexLabelPlacement: 'inside',
                   indexLabelFontColor: 'white',
