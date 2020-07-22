@@ -35,10 +35,8 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar user={user} handleLogout={handleLogout}/>
-      </header>
+    <>
+      <NavBar user={user} handleLogout={handleLogout}/>
       <Switch>
         <Route exact path='/' render={() =>
           <HomePage user={user} max={max} getFullId={getFullId} />
@@ -59,6 +57,6 @@ export default function App() {
           <LoginPage history={history} handleSignupOrLogin={handleSignupOrLogin} />
         }/>
       </Switch>
-    </div>
+    </>
   );
 }

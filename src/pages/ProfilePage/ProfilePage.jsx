@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import IndexDetail from '../../components/IndexDetail/IndexDetail';
 import listService from '../../utils/listService';
-import { set } from 'mongoose';
 
 export default function ProfilePage(props) {
   const [lists, setLists] = useState([]);
@@ -40,30 +39,29 @@ export default function ProfilePage(props) {
 
 	return (
     props.user ?
-      <>
-        <h1>My Collection</h1>
+      <div className='container-lg'>
+        <h1 className='display-4 text-center py-4 py-lg-5 pokedex title'>My Collection</h1>
         {lists.length ?
-          <div>
-            <InfiniteScroll
-              dataLength={items.length}
-              next={fetchMore}
-              hasMore={hasMore}
-              loader={<h4>Loading...</h4>}
-            >
-              {items.map((i, idx) =>
-                idx < lists.length ?
-                  <IndexDetail {...props} id={lists[idx].pokemon} key={lists[idx].pokemon} />
-                  :
-                  ''
-              )}
-            </InfiniteScroll>
-          </div>
+          <InfiniteScroll
+            className='d-flex justify-content-around flex-wrap'
+            dataLength={items.length}
+            next={fetchMore}
+            hasMore={hasMore}
+            loader={<h4 className='break text-center pokedex mb-5'>Loading...</h4>}
+          >
+            {items.map((i, idx) =>
+              idx < lists.length ?
+                <IndexDetail {...props} onProfile={true} id={lists[idx].pokemon} key={lists[idx].pokemon} />
+                :
+                ''
+            )}
+          </InfiniteScroll>
           :
-          <div>
-            <h2>No Pokemon Collected Yet!</h2>
+          <div className='text-center m-5 pt-5'>
+            <h1 className='display-6 pokedex mt-sm-5'>No Pokemon Collected Yet!</h1>
           </div>
         }
-      </>
+      </div>
       :
       <Redirect to='/login' />
 	);

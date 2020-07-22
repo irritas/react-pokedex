@@ -5,22 +5,25 @@ export default function DetailPage(props) {
 	const [pokemon, setPokemon] = useState({});
 
 	useEffect(() => {
+    let mounted = true;
     function fetchData() {
       pokedex.getPokemon(props.id, function(res) {
-        setPokemon(res);
+        if (mounted) setPokemon(res);
       });
     }
     fetchData();
+    return () => mounted = false;
   }, []);
 
 	return (
-    pokemon.name ?
-      <div>
-        More Info on {pokemon.name.toUpperCase()} TBD
-      </div>
-      :
-      <div>
-        #{props.fullId} Loading...
-      </div>
+    <div className='mt-5'>
+      {pokemon.name ?
+        <h3 className='text-center pokedex my-3'>More Info on {pokemon.name.toUpperCase()} TBD</h3>
+        :
+        <h4 className='text-center pokedex my-3'>
+          #{props.fullId} Loading...
+        </h4>
+      }
+    </div>
   );
 }

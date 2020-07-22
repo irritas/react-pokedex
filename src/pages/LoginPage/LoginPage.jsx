@@ -22,28 +22,31 @@ export default function LoginPage(props) {
     }
   };
 
+  function isFormInvalid() {
+    return !(state.email && state.pw);
+  };
+
   return (
-    <div className="LoginPage">
-      <header className="header-footer">Log In</header>
-      <form className="form-horizontal" onSubmit={handleSubmit} >
-        <div className="form-group">
-          <div className="col-sm-12">
-            <input type="email" className="form-control" placeholder="Email" value={state.email} name="email" onChange={handleChange} />
-          </div>
+    <div className="container-lg">
+      <h1 className='display-4 text-center py-4 py-lg-5 pokedex title'>Log In</h1>
+      <div className='d-flex flex-column align-items-center'>
+        <div className='w-75'>
+          <form onSubmit={handleSubmit} >
+            <div className="form-group">
+              <input type="email" className="form-control" placeholder="Email" value={state.email} name="email" onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <input type="password" className="form-control" placeholder="Password" value={state.pw} name="pw" onChange={handleChange} />
+            </div>
+            <div className="form-group text-center mt-lg-5">
+              <button className="btn btn-default pokedex" disabled={isFormInvalid()}>Log In</button>
+              &nbsp;&nbsp;&nbsp;
+              <Link to='/' className='pokedex hide-link-blue'>Cancel</Link>
+            </div>
+          </form>
         </div>
-        <div className="form-group">
-          <div className="col-sm-12">
-            <input type="password" className="form-control" placeholder="Password" value={state.pw} name="pw" onChange={handleChange} />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-12 text-center">
-            <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
-            <Link to='/'>Cancel</Link>
-          </div>
-        </div>
-      </form>
-      <p>{error}</p>
+        <h4 className='pokedex text-center my-3'>{error}</h4>
+      </div>
     </div>
   );
 }

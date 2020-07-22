@@ -10,14 +10,14 @@ export default function HomePage(props) {
   }, []);
 
   return (
-    <div>
-      <h1>React Pokedex</h1>
+    <div className='container-lg'>
+      <h1 className='display-4 text-center py-4 py-lg-5 pokedex title'>React Pokédex</h1>
       {random.length ?
         <DetailCard {...props} id={random[0]} fullId={random[1]} link={true} />
         :
-        <div>
+        <h4 className='pokedex text-center my-3'>
           Loading...
-        </div>
+        </h4>
       }
     </div>
   );

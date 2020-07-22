@@ -21,7 +21,7 @@ const colorLookup = {
   rock: '#B8A038',
   steel: '#B8B8D0',
   water: '#6890F0'
-}
+};
 
 // PokeAPI actual url
 // const BASE_URL = 'https://pokeapi.co/api/v2/';
@@ -35,7 +35,7 @@ const options = {
   protocol: 'https',
   cacheLimit: 30 * 60000, // 30min
   timeout: 10 * 1000 // 10s
-}
+};
 const P = new Pokedex(options);
 
 export default {
@@ -49,24 +49,24 @@ export default {
 
 function getUpperLimit() {
   return MAX_ID;
-}
+};
 
 function getPokemon(id, cb) {
   P.getPokemonByName(id).then(res => cb(res));
-}
+};
 
 function getAbility(name, cb) {
   P.getAbilityByName(name).then(res => cb(res));
-}
+};
 
 function getMove(name, cb) {
   P.getMoveByName(name).then(res => cb(res));
-}
+};
 
 function getFullImage(id) {
   return IMG_URL + id + '.png';
-}
+};
 
 function getTypeColor(type) {
   return colorLookup[type];
-}
+};

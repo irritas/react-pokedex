@@ -32,34 +32,24 @@ export default function SignupForm(props) {
   };
 
   return (
-    <div>
-      <header className="header-footer">Sign Up</header>
+    <div className='w-75'>
       <form className="form-horizontal" onSubmit={handleSubmit} >
         <div className="form-group">
-          <div className="col-sm-12">
-            <input type="text" className="form-control" placeholder="Name" value={state.name} name="name" onChange={handleChange} />
-          </div>
+          <input type="text" className="form-control" placeholder="Name" value={state.name} name="name" onChange={handleChange} />          
         </div>
         <div className="form-group">
-          <div className="col-sm-12">
-            <input type="email" className="form-control" placeholder="Email" value={state.email} name="email" onChange={handleChange} />
-          </div>
+          <input type="email" className="form-control" placeholder="Email" value={state.email} name="email" onChange={handleChange} />
         </div>
         <div className="form-group">
-          <div className="col-sm-12">
-            <input type="password" className="form-control" placeholder="Password" value={state.password} name="password" onChange={handleChange} />
-          </div>
+          <input type="password" className="form-control" placeholder="Password" value={state.password} name="password" onChange={handleChange} />          
         </div>
         <div className="form-group">
-          <div className="col-sm-12">
-            <input type="password" className="form-control" placeholder="Confirm Password" value={state.passwordConf} name="passwordConf" onChange={handleChange} />
-          </div>
+          <input type="password" className="form-control" placeholder="Confirm Password" value={state.passwordConf} name="passwordConf" onChange={handleChange} />
         </div>
-        <div className="form-group">
-          <div className="col-sm-12 text-center">
-            <button className="btn btn-default" disabled={isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-            <Link to='/'>Cancel</Link>
-          </div>
+        <div className="form-group text-center mt-lg-5">
+          <button className="btn btn-default pokedex" disabled={isFormInvalid()}>Sign Up</button>
+          &nbsp;&nbsp;
+          <Link to='/' className='pokedex hide-link-blue'>Cancel</Link>
         </div>
       </form>
     </div>

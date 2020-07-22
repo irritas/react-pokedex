@@ -18,14 +18,15 @@ export default function IndexPage(props) {
 
 	return (
 		<InfiniteScroll
+      className='d-flex justify-content-around flex-wrap'
       dataLength={items.length}
       next={fetchMore}
       hasMore={hasMore}
-      loader={<h4>Loading...</h4>}
+      loader={<h4 className='break text-center pokedex mb-5'>Loading...</h4>}
     >
       {items.map((i, idx) =>
         idx < props.max - props.display ?
-          <IndexDetail {...props} id={idx + 1 + props.display} key={idx} />
+          <IndexDetail {...props} onProfile={false} id={idx + 1 + props.display} key={idx} />
           :
           ''
       )}

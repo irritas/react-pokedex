@@ -9,28 +9,33 @@ export default function DetailPage(props) {
   const fullId = props.getFullId(id);
 
 	useEffect(() => {
+		let mounted = true;
     function fetchData() {
       pokedex.getPokemon(id, function(res) {
-        setPokemon(res);
+        if (mounted) setPokemon(res);
       });
     }
-    fetchData();
+		fetchData();
+		return () => mounted = false;
   }, []);
 
 	return (
-		id > props.max ?
-			<div>
-				<h1>Not Available</h1>
-			</div>
-			:
-			pokemon.name ?
+		<div className='container-lg mt-4 mt-lg-5'>
+			{id > props.max ?
 				<div>
-					<DetailCard {...props} id={id} link={false} fullId={fullId} />
-					<MoreDetails {...props} id={id} />
+					<h1>Not Available</h1>
 				</div>
 				:
-				<div>
-					#{fullId} Loading...
-				</div>
+				pokemon.name ?
+					<div>
+						<DetailCard {...props} id={id} link={false} fullId={fullId} />
+						<MoreDetails {...props} id={id} />
+					</div>
+					:
+					<h4 className='pokedex text-center my-3'>
+						#{fullId} Loading...
+					</h4>
+			}
+		</div>
 	);
 }

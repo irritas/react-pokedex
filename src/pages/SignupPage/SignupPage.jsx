@@ -9,9 +9,12 @@ export default function SignupPage(props) {
   };
 
   return (
-    <div className='SignupPage'>
-      <SignupForm {...props} message={message} updateMessage={updateMessage} />
-      <p>{message}</p>
+    <div className='container-lg'>
+      <h1 className='display-4 text-center py-4 py-lg-5 pokedex title'>Sign Up</h1>
+      <div className='d-flex flex-column align-items-center'>
+        <SignupForm {...props} message={message} updateMessage={updateMessage} />
+        <h4 className='pokedex text-center my-3'>{message}</h4>
+      </div>
     </div>
   );
 }
