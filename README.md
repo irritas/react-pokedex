@@ -46,6 +46,7 @@ Technologies Used
 * Node.js
 * Express
 * Mongoose & MongoDB
+* Heroku
 * PokéAPI via Pokedex Promise v2
 * react-infinite-scroll-component
 * canvasJS
