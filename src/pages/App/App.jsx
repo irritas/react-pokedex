@@ -12,7 +12,7 @@ import userService from '../../utils/userService';
 import pokedex from '../../utils/poke-api';
 
 const max = pokedex.getUpperLimit();
-const display = 12;
+const display = 9;
 
 export default function App() {
   const [user, setUser] = useState(userService.getUser());

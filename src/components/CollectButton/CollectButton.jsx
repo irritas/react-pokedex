@@ -25,7 +25,7 @@ export default function CollectButton(props) {
 
   async function handleClick(addOrRemove) {
     setList(await listService.update(addOrRemove, props.id));
-    // if (props.onProfile) props.setInvis();
+    if (props.onProfile) props.setInvis();
   };
 
   return (
