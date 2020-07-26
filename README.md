@@ -58,6 +58,8 @@ Getting Started
 
 **_Link to app:_** https://bliu-pokedex.herokuapp.com/
 
+**_Link to trello:_** https://trello.com/b/fAYGJQj4/react-pokedex
+
 Unauthenticated users have access to viewing all Pokémon. Only authenticated users may edit their personal collection.
 
 
