@@ -15,9 +15,11 @@ export default function HomePage(props) {
       {random.length ?
         <DetailCard {...props} id={random[0]} fullId={random[1]} link={true} />
         :
-        <h4 className='pokedex text-center my-3'>
-          Loading...
-        </h4>
+        <div style={{ height: '50vh' }} className='d-flex justify-content-center align-items-center'>
+          <div className='spinner-border p-5' role='status'>
+            <span className='sr-only'>Loading...</span>
+          </div>
+        </div>
       }
     </div>
   );

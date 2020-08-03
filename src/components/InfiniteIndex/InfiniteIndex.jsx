@@ -22,7 +22,13 @@ export default function IndexPage(props) {
       dataLength={items.length}
       next={fetchMore}
       hasMore={hasMore}
-      loader={<h4 className='break text-center pokedex mb-5'>Loading...</h4>}
+      loader={
+        <div style={{ width: '100%' }} className='text-center mb-5'>
+          <div className='spinner-border p-4' role='status'>
+            <span className='sr-only'>Loading...</span>
+          </div>
+        </div>
+      }
     >
       {items.map((i, idx) =>
         idx < props.max - props.display ?

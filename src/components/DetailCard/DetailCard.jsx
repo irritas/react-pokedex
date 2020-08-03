@@ -115,9 +115,11 @@ export default function DetailPage(props) {
           }
         </div>
         :
-        <h4 className='text-center pokedex my-3'>
-          #{props.fullId} Loading...
-        </h4>
+        <div style={{ height: '67vh' }} className='d-flex align-items-center justify-content-center'>
+          <div className='spinner-border p-5' role='status'>
+            <span className='sr-only'>Loading...</span>
+          </div>
+        </div>
       }
     </div>
 	);

@@ -54,9 +54,11 @@ export default function IndexDetail(props) {
             </div>
           </>
           :
-          <h4 className='pokedex text-center my-3'>
-            #{fullId} Loading...
-          </h4>
+          <div className='my-auto'>
+            <div className='spinner-border p-4' role='status'>
+              <span className='sr-only'>Loading...</span>
+            </div>
+          </div>
         }
       </div>
       :

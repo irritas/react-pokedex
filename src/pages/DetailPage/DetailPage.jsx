@@ -22,19 +22,19 @@ export default function DetailPage(props) {
 	return (
 		<div className='container-lg mt-4 mt-lg-5'>
 			{id > props.max ?
-				<div>
-					<h1>Not Available</h1>
-				</div>
+				<h1 className='display-4 text-center py-4 py-lg-5 pokedex title'>Not Available</h1>
 				:
 				pokemon.name ?
 					<div>
 						<DetailCard {...props} id={id} link={false} fullId={fullId} />
-						<MoreDetails {...props} id={id} />
+						<MoreDetails {...props} pokemon={pokemon} id={id} />
 					</div>
 					:
-					<h4 className='pokedex text-center my-3'>
-						#{fullId} Loading...
-					</h4>
+					<div style={{ height: '50vh' }} className='d-flex justify-content-center align-items-center'>
+						<div className='spinner-border p-5' role='status'>
+							<span className='sr-only'>Loading...</span>
+						</div>
+					</div>
 			}
 		</div>
 	);
