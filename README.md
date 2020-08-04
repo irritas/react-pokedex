@@ -49,6 +49,7 @@ Technologies Used
 * Heroku
 * PokéAPI via Pokedex Promise v2
 * react-infinite-scroll-component
+* react-image
 * canvasJS
 * bcrypt
 

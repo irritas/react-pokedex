@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {Img} from 'react-image';
 import CollectButton from '../CollectButton/CollectButton';
 import pokedex from '../../utils/poke-api';
 
@@ -33,8 +34,18 @@ export default function IndexDetail(props) {
         {pokemon.name ?
           <>
             <Link to={`/pokemon/${props.id}`} className='row hide-link d-flex flex-column align-items-center'>
-              <div style={{ backgroundColor: getColor() }} className='row poke-img p-1 mx-4 mt-2'>
-                <img src={pokedex.getFullImage(fullId)} alt={pokemon.name} />
+              <div style={{ backgroundColor: getColor(), width: '300px', height: '300px' }} className='row poke-img p-1 mx-4 mt-2'>
+                <Img
+                  src={pokedex.getFullImage(fullId)}
+                  alt={pokemon.name}
+                  loader={
+                    <div style={{ width: '100%', height: '100%' }} className='d-flex align-items-center justify-content-center'>
+                      <div className='spinner-border p-4' role='status'>
+                        <span className='sr-only'>Loading...</span>
+                      </div>
+                    </div>
+                  }
+                />
               </div>
               <div style={{ opacity: '50%' }} className='row pokedex align-self-start ml-4 mt-2 mb-0'>
                 <h6>&nbsp;#{fullId}</h6>

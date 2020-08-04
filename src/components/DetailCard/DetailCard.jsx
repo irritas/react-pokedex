@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {Img} from 'react-image';
 import CollectButton from '../CollectButton/CollectButton';
 import pokedex from '../../utils/poke-api';
 import CanvasJSReact from '../../canvasjs.react';
@@ -48,8 +49,18 @@ export default function DetailPage(props) {
     <div className='box m-0 mb-3'>
       {pokemon.name ?
         <div className='row justify-content-center'>
-          <div style={{ backgroundColor: getColor() }} className='col-xs poke-img p-1 mx-5 my-4 my-xl-5'>
-            <img src={pokedex.getFullImage(props.fullId)} alt={pokemon.name} />
+          <div style={{ backgroundColor: getColor(), width: '30rem' }} className='col-xs poke-img p-1 mx-5 my-4 my-xl-5'>
+            <Img
+              src={pokedex.getFullImage(props.fullId)}
+              alt={pokemon.name}
+              loader={
+                <div style={{ width: '100%', height: '29rem', maxHeight: '69vw' }} className='d-flex align-items-center justify-content-center'>
+                  <div className='spinner-border p-5' role='status'>
+                    <span className='sr-only'>Loading...</span>
+                  </div>
+                </div>
+              }
+            />
           </div>
           <div className='col-xl-5 d-flex flex-column justify-content-between align-items-center align-items-xl-start mt-1 mx-1 ml-xl-0 my-xl-5'>
             <div className='row text-center text-md-left'>
@@ -115,7 +126,7 @@ export default function DetailPage(props) {
           }
         </div>
         :
-        <div style={{ height: '67vh' }} className='d-flex align-items-center justify-content-center'>
+        <div style={{ height: '39rem' }} className='d-flex align-items-center justify-content-center'>
           <div className='spinner-border p-5' role='status'>
             <span className='sr-only'>Loading...</span>
           </div>
