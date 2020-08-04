@@ -1,9 +1,12 @@
 import React from 'react';
+import AbilityCard from '../AbilityCard/AbilityCard';
+import MoveCard from '../MoveCard/MoveCard';
 
-export default function DetailPage(props) {
+export default function MoreDetails(props) {
 	return (
     <div className='mt-5'>
-      <h3 className='text-center pokedex my-3'>More Info on {props.pokemon.name.toUpperCase()} TBD</h3>
+      <AbilityCard {...props} />
+      <MoveCard {...props} />
     </div>
   );
 }
