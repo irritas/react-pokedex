@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Img} from 'react-image';
+import { Img } from 'react-image';
 import CollectButton from '../CollectButton/CollectButton';
 import pokedex from '../../utils/poke-api';
 
@@ -40,7 +40,7 @@ export default function IndexDetail(props) {
                   alt={pokemon.name}
                   loader={
                     <div style={{ width: '100%', height: '100%' }} className='d-flex align-items-center justify-content-center'>
-                      <div className='spinner-border p-4' role='status'>
+                      <div className='spinner-grow text-light p-4' role='status'>
                         <span className='sr-only'>Loading...</span>
                       </div>
                     </div>

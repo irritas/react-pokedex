@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {Img} from 'react-image';
+import { Img } from 'react-image';
+import { HorizontalBar } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import CollectButton from '../CollectButton/CollectButton';
 import pokedex from '../../utils/poke-api';
-import CanvasJSReact from '../../canvasjs.react';
-const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function DetailPage(props) {
   const [pokemon, setPokemon] = useState({});
+  const [data, setData] = useState({});
 
 	useEffect(() => {
     let mounted = true;
@@ -20,14 +21,24 @@ export default function DetailPage(props) {
     return () => mounted = false;
   }, []);
 
-  function fetchStats() {
-    return pokemon.stats.map(e => {
-      return {
-        y: e.base_stat,
-        label: e.stat.name.toUpperCase()
+  useEffect(() => {
+    let mounted = true;
+    if (pokemon.name) {
+      const newData = {
+        labels: [],
+        datasets: [{
+          backgroundColor: getSecondColor(),
+          data: []
+        }]
       }
-    });
-  }
+      pokemon.stats.forEach(e => {
+        newData.labels.push(e.stat.name.toUpperCase());
+        newData.datasets[0].data.push(e.base_stat);
+      });
+      if (mounted) setData(newData);
+    }
+    return () => mounted = false;
+  }, [pokemon]);
 
   function highestStat() {
     let stats = pokemon.stats.map(e => {
@@ -55,14 +66,14 @@ export default function DetailPage(props) {
               alt={pokemon.name}
               loader={
                 <div style={{ width: '100%', height: '29rem', maxHeight: '69vw' }} className='d-flex align-items-center justify-content-center'>
-                  <div className='spinner-border p-5' role='status'>
+                  <div className='spinner-grow text-light p-5' role='status'>
                     <span className='sr-only'>Loading...</span>
                   </div>
                 </div>
               }
             />
           </div>
-          <div className='col-xl-5 d-flex flex-column justify-content-between align-items-center align-items-xl-start mt-1 mx-1 ml-xl-0 my-xl-5'>
+          <div className='col-xl-5 d-flex flex-column justify-content-between align-items-center align-items-xl-start pr-xl-0 mt-1 mx-1 ml-xl-0 my-xl-5'>
             <div className='row text-center text-md-left'>
               <h1 style={{ textShadow: `2px 2px ${getColor()}` }} className='col-sm-auto pokedex p-0 m-0 mr-sm-1'>{pokemon.name.toUpperCase()}</h1>
               <h3 className='col-sm-auto text-black-50 p-0 m-0 pt-1 pokedex'>#{props.fullId}</h3>
@@ -77,38 +88,50 @@ export default function DetailPage(props) {
               <span><h4>Height: {pokemon.height / 10}m</h4></span>
               <span><h4>&nbsp;&nbsp;Weight: {pokemon.weight / 10}kg</h4></span>
             </div>
-            <div className='container-fluid row align-self-start px-0 mx-0 mt-2'>
-              <CanvasJSChart options={{
-                animationEnabled: true,
-                theme: 'light2',
-                height: 200,
-                axisX: {
-                  reversed: true,
-                  gridThickness: 0,
-                  tickLength: 0,
-                  labelFontColor: 'black',
-                  labelFontFamily: 'sans-serif',
-                  labelFontWeight: 'bold'
-                },
-                axisY: {
-                  maximum: highestStat(),
-                  gridThickness: 0,
-                  tickLength: 0,
-                  labelFormatter: function(e) {
-                    return "";
+            <div style={{ width: '100%' }} className='row mt-2 pl-1 pr-3 pl-sm-3 pr-sm-5 px-xl-0'>
+              <HorizontalBar
+                data={data}
+                plugins={[ChartDataLabels]}
+                options={{
+                  responsive: true,
+                  title: {
+                    display:false
+                  },
+                  legend: {
+                    display:false
+                  },
+                  tooltips: {
+                    yAlign: 'center'
+                  },
+                  plugins: {
+                    datalabels: {
+                      color: 'white',
+                      display: true
+                    }
+                  },
+                  scales: {
+                    yAxes: [{
+                      gridLines: {
+                        display: false
+                      },
+                      ticks: {
+                        fontColor: 'black',
+                        fontSize: '11'
+                      }
+                    }],
+                    xAxes: [{
+                      gridLines: {
+                        display: false
+                      },
+                      ticks: {
+                        beginAtZero: true,
+                        display: false,
+                        max: highestStat()
+                      }
+                    }],
                   }
-                },
-                data: [{
-                  type: 'bar',
-                  color: getSecondColor(),
-                  indexLabel: '{y}',
-                  indexLabelPlacement: 'inside',
-                  indexLabelFontColor: 'white',
-                  indexLabelFontFamily: 'sans-serif',
-                  indexLabelFontWeight: 'bold',
-                  dataPoints: fetchStats()
-                }]
-              }} />
+                }}
+              />
             </div>
             <div className='row my-4 mb-xl-2'>
               <CollectButton {...props} />
@@ -126,7 +149,7 @@ export default function DetailPage(props) {
           }
         </div>
         :
-        <div style={{ height: '39rem' }} className='d-flex align-items-center justify-content-center'>
+        <div style={{ height: '37rem' }} className='d-flex align-items-center justify-content-center'>
           <div className='spinner-border p-5' role='status'>
             <span className='sr-only'>Loading...</span>
           </div>
