@@ -1,4 +1,5 @@
 import React from 'react';
+import pokedex from '../../utils/poke-api';
 
 export default function AbilityCard(props) {
 	return (
