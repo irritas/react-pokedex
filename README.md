@@ -67,8 +67,8 @@ Unauthenticated users have access to viewing all Pokémon. Only authenticated us
 Icebox
 ------
 
-* React transitions
 * Pokémon abilities and moves
+* React transitions
 * Search feature
 * Filter feature
 * Sort feature
