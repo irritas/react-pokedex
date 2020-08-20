@@ -42,7 +42,7 @@ Technologies Used
 * HTML
 * CSS
 * JavaScript
-* React
+* React.js
 * Node.js
 * Express
 * Mongoose & MongoDB
